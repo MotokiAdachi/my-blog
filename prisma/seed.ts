@@ -1,20 +1,26 @@
 import { PrismaClient } from "@prisma/client";
-import * as bcrypt from "bcryptjs";
+import * as bcypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
 async function main() {
+  // クリーンアップ
   await prisma.post.deleteMany();
   await prisma.user.deleteMany();
-  const hashedPassword = await bcrypt.hash("password123", 12);
+
+  const hashedPassword = await bcypt.hash("password123", 12);
+
+  // ダミー画像URL
   const dummyImages = [
     "https://picsum.photos/seed/post1/600/400",
     "https://picsum.photos/seed/post2/600/400",
   ];
+
+  // ユーザー作成
   const user = await prisma.user.create({
     data: {
       email: "test@example.com",
-      name: "test user",
+      name: "Test User",
       password: hashedPassword,
       posts: {
         create: [
@@ -22,18 +28,19 @@ async function main() {
             title: "初めてのブログ投稿",
             content: "これは最初のブログ投稿です。",
             topImage: dummyImages[0],
-            publised: true,
+            published: true,
           },
           {
-            title: "2つ目のブログ投稿",
+            title: "2番目の投稿",
             content: "これは2つ目のブログ投稿です。",
             topImage: dummyImages[1],
-            publised: true,
+            published: true,
           },
         ],
       },
     },
   });
+
   console.log({ user });
 }
 
