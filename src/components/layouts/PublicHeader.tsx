@@ -26,7 +26,7 @@ export default function PublicHeader() {
         <div className="flex items-center gap-4">
           <Input
             placeholder="記事を検索..."
-            className="w-[200px] ld:w-[300px]"
+            className="w-50 ld:w-[300px]"
           ></Input>
           <Button variant="outline" asChild>
             <Link href="/login">ログイン</Link>
