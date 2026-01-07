@@ -22,18 +22,18 @@ export default function PublicHeader() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-        </div>
-        <div className="flex items-center gap-4">
-          <Input
-            placeholder="記事を検索..."
-            className="w-50 ld:w-[300px]"
-          ></Input>
-          <Button variant="outline" asChild>
-            <Link href="/login">ログイン</Link>
-          </Button>
-          <Button variant="outline" asChild>
-            <Link href="/register">登録</Link>
-          </Button>
+          <div className="flex items-center gap-4">
+            <Input
+              placeholder="記事を検索..."
+              className="w-50 ld:w-[300px] bg-white"
+            ></Input>
+            <Button variant="outline" asChild>
+              <Link href="/login">ログイン</Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link href="/register">登録</Link>
+            </Button>
+          </div>
         </div>
       </header>
     </div>
