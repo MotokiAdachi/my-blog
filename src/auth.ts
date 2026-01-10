@@ -31,7 +31,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
           ); // パスワード比較
           if (passwordsMatch) return user;
         }
-        return;
+        return null;
       },
     }),
   ],
