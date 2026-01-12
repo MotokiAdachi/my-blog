@@ -1,12 +1,13 @@
 import { getOwnPost } from "@/lib/ownPost";
 import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
+import PostDorpdownMenu from "@/components/post/PostDorpdownMenu";
 
 export default async function page() {
   const session = await auth();
 
   const userId = session?.user?.id;
-  if (session?.user?.id || !userId) {
+  if (!userId) {
     throw new Error("不正なリクエストです。");
   }
 
