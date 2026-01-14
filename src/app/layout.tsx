@@ -1,4 +1,5 @@
 import "./globals.css";
+import "highlight.js/styles/github.css"; // コードハイライト用のスタイル
 
 export default function RootLayout({
   children,

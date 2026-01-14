@@ -2,6 +2,7 @@ import { getOwnPost } from "@/lib/ownPost";
 import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import PostDorpdownMenu from "@/components/post/PostDorpdownMenu";
+import Link from "next/link";
 
 export default async function page() {
   const session = await auth();
@@ -17,7 +18,9 @@ export default async function page() {
     <div className="p-4">
       <div className="flex justify-between">
         <h1 className="text-2xl font-bold mb-4">記事一覧</h1>
-        <Button>新規記事作成</Button>
+        <Button>
+          <Link href="/manage/posts/create">新規記事作成</Link>
+        </Button>
       </div>
       <table className="table-auto w-full border-collapse border">
         <thead>
