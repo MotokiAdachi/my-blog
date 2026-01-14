@@ -6,7 +6,6 @@ import Link from "next/link";
 
 export default async function page() {
   const session = await auth();
-
   const userId = session?.user?.id;
   if (!userId) {
     throw new Error("不正なリクエストです。");

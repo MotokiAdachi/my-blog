@@ -21,8 +21,46 @@ export default async function createPost(
   const topImage = topImageInput instanceof File ? topImageInput : null;
 
   // バリデーション
+  const validationResult = postSchema.safeParse({
+    title,
+    content,
+    topImage,
+  });
+
+  if (!validationResult.success) {
+    return {
+      success: false,
+      errors: validationResult.error.flatten().fieldErrors,
+    };
+  }
 
   // 画像保存
+  const imageUrl = topImage ? await saveImage(topImage) : null;
+  if (topImage && !imageUrl) {
+    return {
+      success: false,
+      errors: {
+        image: ["画像の保存に失敗しました"],
+      },
+    };
+  }
 
   // DB保存
+  const session = await auth();
+  const userId = session?.user?.id;
+  if (!userId) {
+    throw new Error("不正なリクエストです。");
+  }
+
+  await prisma.post.create({
+    data: {
+      title,
+      content,
+      topImage: imageUrl,
+      published: true,
+      authorId: userId,
+    },
+  });
+
+  redirect("/dashboard");
 }
