@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { createUser } from "@/lib/actions/createUser";
 
 export default function RegisterForm() {
-  const [state, formActionState] = useActionState(createUser, {
+  const [state, formAction] = useActionState(createUser, {
     success: false,
     errors: {},
   });
@@ -18,7 +18,7 @@ export default function RegisterForm() {
         <CardTitle>ユーザー登録</CardTitle>
       </CardHeader>
       <CardContent>
-        <form action={formActionState} className="space-y-4">
+        <form action={formAction} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name">名前</Label>
             <Input id="name" name="name" type="text" required />

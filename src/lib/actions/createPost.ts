@@ -10,7 +10,7 @@ type ActionState = {
   errors: Record<string, string[]>;
 };
 
-export default async function createPost(
+export async function createPost(
   prevState: ActionState,
   formData: FormData
 ): Promise<ActionState> {
