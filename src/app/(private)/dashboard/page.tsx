@@ -1,4 +1,4 @@
-import { getOwnPost } from "@/lib/ownPost";
+import { getOwnPosts } from "@/lib/ownPost";
 import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import PostDorpdownMenu from "@/components/post/PostDorpdownMenu";
@@ -11,7 +11,7 @@ export default async function page() {
     throw new Error("不正なリクエストです。");
   }
 
-  const posts = await getOwnPost(userId);
+  const posts = await getOwnPosts(userId);
 
   return (
     <div className="p-4">
