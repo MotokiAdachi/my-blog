@@ -1,3 +1,4 @@
+import { log } from "console";
 import { writeFile } from "fs/promises";
 import path from "path";
 
