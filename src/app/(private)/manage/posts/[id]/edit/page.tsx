@@ -7,7 +7,7 @@ type Params = {
   params: Promise<{ id: string }>;
 };
 
-export async function EditPage({ params }: Params) {
+export default async function EditPage({ params }: Params) {
   const session = await auth();
   const userId = session?.user?.id;
   if (!userId) {

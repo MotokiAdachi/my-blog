@@ -1,5 +1,5 @@
 "use client";
-import { useState, useActionState } from "react";
+import { useState, useActionState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createPost } from "@/lib/actions/createPost";
+import Image from "next/image";
 
 type EditPostFormProps = {
   post: {
@@ -32,6 +33,22 @@ export default function EditPostForm({ post }: EditPostFormProps) {
     setContent(value);
     setContentLength(value.length);
   };
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const previewUrl = URL.createObjectURL(file);
+      setImagPreview(previewUrl);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (imagePreview && imagePreview !== post.topImage) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview, post.topImage]);
 
   const [state, formAction] = useActionState(createPost, {
     success: false,
@@ -62,7 +79,27 @@ export default function EditPostForm({ post }: EditPostFormProps) {
         </div>
         <div>
           <Label htmlFor="topImage">トップ画像</Label>
-          <Input type="file" id="topImage" accept="image/*" name="topImage" />
+          <Input
+            type="file"
+            id="topImage"
+            accept="image/*"
+            name="topImage"
+            onChange={handleImageChange}
+          />
+          {imagePreview && (
+            <div className="mt-2">
+              <Image
+                src={imagePreview}
+                alt={post.title}
+                width={0}
+                height={0}
+                sizes="200px"
+                className="w-50"
+                priority
+              />
+            </div>
+          )}
+
           {state.errors.topImage && (
             <p className="text-sm text-red-500 mt-1">
               {state.errors.topImage.join(", ")}
