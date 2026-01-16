@@ -7,7 +7,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { createPost } from "@/lib/actions/createPost";
+import { updatePost } from "@/lib/actions/updatePost";
 import Image from "next/image";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
@@ -51,7 +51,7 @@ export default function EditPostForm({ post }: EditPostFormProps) {
     };
   }, [imagePreview, post.topImage]);
 
-  const [state, formAction] = useActionState(createPost, {
+  const [state, formAction] = useActionState(updatePost, {
     success: false,
     errors: {},
   });
